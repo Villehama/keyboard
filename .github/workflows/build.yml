@@ -1,6 +1,14 @@
-name: Build ZMK firmware
-on: [push, pull_request, workflow_dispatch]
+# build.yaml  ── Auto-KDK / ZMK 3.x 用
+include:
+  # ── central（左手）──────────────────────────────
+  - board: nice_nano_v2            # 利用 MCU ボード
+    shield: zion01_left            # 左手シールド名
+    snippet: studio-rpc-webusb     # ★ WebUSB RPC 用スニペット
+    config: |                      # 追加 Kconfig
+      CONFIG_ZMK_STUDIO=y          # Studio 機能を有効
+      CONFIG_ZMK_STUDIO_LOCKING=n  # ←🔒ロック不要なら n
+      # CONFIG_ZMK_STUDIO_LOCKING=y  # ←ロックしたい場合はこちらを有効
 
-jobs:
-  build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+  # ── peripheral（右手）─────────────────────────
+  - board: nice_nano_v2
+    shield: zion01_right
