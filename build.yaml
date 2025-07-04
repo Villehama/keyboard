@@ -1,9 +1,10 @@
 include:
+  # ── central（左手）──
   - board: nice_nano_v2
     shield: zion01_left
-    snippet: studio-rpc-webusb
-    config: |
-      CONFIG_ZMK_STUDIO=y
-      CONFIG_ZMK_STUDIO_LOCKING=n
+    snippet: studio-rpc-usb-uart     # ← main に存在するスニペット
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_STUDIO_LOCKING=n
+
+  # ── peripheral（右手）──
   - board: nice_nano_v2
     shield: zion01_right
